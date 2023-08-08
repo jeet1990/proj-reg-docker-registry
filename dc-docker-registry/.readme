@@ -1,0 +1,23 @@
+export app_HOME=$(pwd)/gitlab
+
+
+##git 
+    git clone git@github.com:jeet1990/proj-reg-docker-registry.git
+    #branches
+
+
+
+
+##password can be fetched from 
+    
+
+
+##network:
+
+
+##storage:
+
+
+##ref URL
+
+    https://www.c-sharpcorner.com/article/how-to-secure-private-docker-registry/

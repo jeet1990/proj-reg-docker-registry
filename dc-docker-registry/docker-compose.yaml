@@ -1,0 +1,28 @@
+
+version: '3.8'
+services:
+  <app>:
+    image: ''
+    restart: unless-stopped
+    hostname: ''
+    container_name: ''
+    environment:
+    command: 
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - gitlab
+    ports:
+      - ''
+      - ''
+    volumes:
+      - '$APP_HOMEDIR/gitlab-pdata/config:/etc/gitlab'
+      - '$APP_HOMEDIR/gitlab-pdata/logs:/var/log/gitlab'
+      - '$APP_HOMEDIR/gitlab-pdata/data:/var/opt/gitlab'
+
+networks:
+  gitlab:
+    name: gitlab-network
+
+volumes:
+  prometheus-v:
+    name: prometheus-data
