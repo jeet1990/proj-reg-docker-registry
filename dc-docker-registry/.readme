@@ -20,4 +20,5 @@ export app_HOME=$(pwd)/gitlab
 
 ##ref URL
 
-    https://www.c-sharpcorner.com/article/how-to-secure-private-docker-registry/
+   https://www.c-sharpcorner.com/article/how-to-secure-private-docker-registry/
+   

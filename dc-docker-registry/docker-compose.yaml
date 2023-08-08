@@ -1,28 +1,34 @@
 
 version: '3.8'
 services:
-  <app>:
-    image: ''
+  reg-docker-registry:
+    image: 'registry:2'
     restart: unless-stopped
-    hostname: ''
-    container_name: ''
+    hostname: 'docker-registry-h'
+    container_name: 'docker-registry-c'
     environment:
-    command: 
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    networks:
-      - gitlab
+      REGISTRY_AUTH=htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM="Registry"
+      REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+      REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+      REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password 
+
+    # command: 
+    #   - '--config.file=/etc/prometheus/prometheus.yml'
+    # networks:
+    #   - gitlab
     ports:
-      - ''
+      - '5000:5000'
       - ''
     volumes:
-      - '$APP_HOMEDIR/gitlab-pdata/config:/etc/gitlab'
-      - '$APP_HOMEDIR/gitlab-pdata/logs:/var/log/gitlab'
-      - '$APP_HOMEDIR/gitlab-pdata/data:/var/opt/gitlab'
+      - '$APP_HOMEDIR/docker-registry-pdata/registry/data:/var/lib/registry'
+      - '$APP_HOMEDIR/docker-registry-config/certs/:/certs'
+      - '$APP_HOMEDIR/docker-registry-config/auth/:/auth'
 
 networks:
-  gitlab:
-    name: gitlab-network
+  # gitlab:
+  #   name: gitlab-network
 
 volumes:
-  prometheus-v:
-    name: prometheus-data
+  # prometheus-v:
+  #   name: prometheus-data
