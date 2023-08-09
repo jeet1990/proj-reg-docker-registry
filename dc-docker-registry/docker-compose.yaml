@@ -12,8 +12,10 @@ services:
       REGISTRY_HTTP_TLS_KEY=/certs/domain.key
       REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
       REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password 
+      REGISTRY_HTTP_DEBUG_ADDR=':5001'
     ports:
       - '5000:5000'
+      - '5001:5001'
     volumes:
       - '$APP_HOMEDIR/docker-registry-pdata/registry/data:/var/lib/registry'
       - '$APP_HOMEDIR/docker-registry-config/certs/:/certs'
