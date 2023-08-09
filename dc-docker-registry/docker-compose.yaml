@@ -1,12 +1,12 @@
 
 version: '3.8'
 services:
-  htpasswd:
-    image: 'registry:2'
-    hostname: 'htpasswd-h'
-    container_name: 'htpasswd-c'
-    volumes:
-      - '$APP_HOMEDIR/docker-registry-config/auth/:/auth'
+  # htpasswd:
+  #   image: 'registry:2'
+  #   hostname: 'htpasswd-h'
+  #   container_name: 'htpasswd-c'
+  #   volumes:
+  #     - '$APP_DC_HOMEDIR/docker-registry-config/auth/:/auth'
 
 
   reg-docker-registry:
@@ -19,15 +19,15 @@ services:
       - REGISTRY_AUTH_HTPASSWD_REALM="Registry Realm"
       - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
-      - REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password 
+      - REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd
       - REGISTRY_HTTP_DEBUG_ADDR=':5001'
     ports:
-      - '5000:5000'
+      - '50001:5000'
       - '5001:5001'
     volumes:
-      - '$APP_HOMEDIR/docker-registry-pdata/registry/data:/var/lib/registry'
-      - '$APP_HOMEDIR/docker-registry-config/certs/:/certs'
-      - '$APP_HOMEDIR/docker-registry-config/auth/:/auth'
+      - '$APP_DC_HOMEDIR/docker-registry-pdata/registry/data:/var/lib/registry'
+      - '$APP_DC_HOMEDIR/docker-registry-config/certs/:/certs'
+      - '$APP_DC_HOMEDIR/docker-registry-config/auth/:/auth'
 
 # networks:
 #   # gitlab:

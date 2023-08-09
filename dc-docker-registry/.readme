@@ -1,8 +1,8 @@
 
 ##spl instructions
-    export app_HOME=$(pwd)
+    export APP_DC_HOMEDIR=$(pwd)/docker-registry-config/auth
 
-    certs default are created for docker-reg. so the url shud be docker-reg. below steps show how to create crt and keys
+    certs default are created for docker-registry. so the url shud be docker-reg. below steps show how to create crt and keys
 
 
 ##git 
@@ -36,10 +36,11 @@
     curl --cacert domain.crt https://your.registry:5000/v2/_catalog
 
     ##to add passwd
-        htpasswd -Bbc ./auth/htpasswd admin1 Password@123
+        cd 
+        htpasswd -Bbc htpasswd admin1 Password@123
 
     ##to add certs
-        sudo openssl req  -newkey rsa:4096 -nodes -sha256 -keyout domain.key
+        openssl req  -newkey rsa:4096 -nodes -sha256 -keyout domain.key
         -x509 -days 365 -out domain.crt
 
 ##ref URL
