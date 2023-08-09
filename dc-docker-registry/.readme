@@ -1,6 +1,15 @@
 export app_HOME=$(pwd)/gitlab
 
 
+    curl -X GET https://myregistry:5000/v2/_catalog
+    curl -X GET https://myregistry:5000/v2/ubuntu/tags/list
+
+    curl -X GET -u <user>:<pass> https://myregistry:5000/v2/_catalog
+    curl -X GET -u <user>:<pass> https://myregistry:5000/v2/ubuntu/tags/list
+
+    curl --cacert domain.crt https://your.registry:5000/v2/_catalog
+
+
 ##git 
     git clone git@github.com:jeet1990/proj-reg-docker-registry.git
     #branches
