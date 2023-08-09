@@ -1,18 +1,26 @@
 
 version: '3.8'
 services:
+  htpasswd:
+    image: 'registry:2'
+    hostname: 'htpasswd-h'
+    container_name: 'htpasswd-c'
+    volumes:
+      - '$APP_HOMEDIR/docker-registry-config/auth/:/auth'
+
+
   reg-docker-registry:
     image: 'registry:2'
     restart: unless-stopped
     hostname: 'docker-registry-h'
     container_name: 'docker-registry-c'
     environment:
-      REGISTRY_AUTH=htpasswd
-      REGISTRY_AUTH_HTPASSWD_REALM="Registry"
-      REGISTRY_HTTP_TLS_KEY=/certs/domain.key
-      REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
-      REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password 
-      REGISTRY_HTTP_DEBUG_ADDR=':5001'
+      - REGISTRY_AUTH=htpasswd
+      - REGISTRY_AUTH_HTPASSWD_REALM="Registry Realm"
+      - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+      - REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password 
+      - REGISTRY_HTTP_DEBUG_ADDR=':5001'
     ports:
       - '5000:5000'
       - '5001:5001'
@@ -21,10 +29,10 @@ services:
       - '$APP_HOMEDIR/docker-registry-config/certs/:/certs'
       - '$APP_HOMEDIR/docker-registry-config/auth/:/auth'
 
-networks:
-  # gitlab:
-  #   name: gitlab-network
+# networks:
+#   # gitlab:
+#   #   name: gitlab-network
 
-volumes:
-  # prometheus-v:
-  #   name: prometheus-data
+# volumes:
+#   # prometheus-v:
+#   #   name: prometheus-data

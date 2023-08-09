@@ -1,13 +1,8 @@
-export app_HOME=$(pwd)/gitlab
 
+##spl instructions
+    export app_HOME=$(pwd)
 
-    curl -X GET https://myregistry:5000/v2/_catalog
-    curl -X GET https://myregistry:5000/v2/ubuntu/tags/list
-
-    curl -X GET -u <user>:<pass> https://myregistry:5000/v2/_catalog
-    curl -X GET -u <user>:<pass> https://myregistry:5000/v2/ubuntu/tags/list
-
-    curl --cacert domain.crt https://your.registry:5000/v2/_catalog
+    certs default are created for docker-reg. so the url shud be docker-reg. below steps show how to create crt and keys
 
 
 ##git 
@@ -17,7 +12,9 @@ export app_HOME=$(pwd)/gitlab
 
 
 
-##password can be fetched from 
+##password is
+    admin1
+    Password@123
     
 
 
@@ -26,8 +23,27 @@ export app_HOME=$(pwd)/gitlab
 
 ##storage:
 
+## useful commands
+    
+    curl -X GET https://myregistry:5000/v2/_catalog
+    curl -X GET https://myregistry:5000/v2/ubuntu/tags/list
+
+    curl -u admin:password -v -X GET https://ip_address:5000/v2/_catalog
+
+    curl -X GET -u <user>:<pass> https://myregistry:5000/v2/_catalog
+    curl -X GET -u <user>:<pass> https://myregistry:5000/v2/ubuntu/tags/list
+
+    curl --cacert domain.crt https://your.registry:5000/v2/_catalog
+
+    ##to add passwd
+        htpasswd -Bbc ./auth/htpasswd admin1 Password@123
+
+    ##to add certs
+        sudo openssl req  -newkey rsa:4096 -nodes -sha256 -keyout domain.key
+        -x509 -days 365 -out domain.crt
 
 ##ref URL
 
    https://www.c-sharpcorner.com/article/how-to-secure-private-docker-registry/
+   https://medium.com/@ifeanyiigili/how-to-setup-a-private-docker-registry-with-a-self-sign-certificate-43a7407a1613
    
